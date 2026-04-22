@@ -105,15 +105,6 @@ MAX_SAMPLES=50 ./scripts/run_baseline.sh
 
 ---
 
-## Task Owners
-
-| Task | Owner |
-|---|---|
-| Overall Tracking | Dr. Sonal |
-| Paper Writing | Debasish / Shantipriya |
-| GPTQ | Sakshi and Mahi |
-| AWQ | Subrat, Anurag |
-| TurboQuant / KV-compress | Debasish |
 
 ---
 
