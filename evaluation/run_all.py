@@ -24,9 +24,25 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger(__name__)
 
 BENCHMARK_SCRIPTS = {
-    "gsm8k": "benchmarks/gsm8k_eval.py",
+    # English benchmarks
+    "gsm8k":   "benchmarks/gsm8k_eval.py",
     "msmarco": "benchmarks/msmarco_eval.py",
-    "boolq": "benchmarks/boolq_eval.py",
+    "boolq":   "benchmarks/boolq_eval.py",
+    # Multilingual benchmarks
+    "mgsm_hi":             "benchmarks/mgsm_eval.py",
+    "indicqa_or":          "benchmarks/indicqa_eval.py",
+    "indicqa_hi":          "benchmarks/indicqa_eval.py",
+    "indic_sentiment_hi":  "benchmarks/indic_sentiment_eval.py",
+    "indic_sentiment_or":  "benchmarks/indic_sentiment_eval.py",
+}
+
+# Extra CLI flags injected per benchmark key
+BENCHMARK_EXTRA_ARGS = {
+    "mgsm_hi":             ["--language", "hi"],
+    "indicqa_or":          ["--language", "or"],
+    "indicqa_hi":          ["--language", "hi"],
+    "indic_sentiment_hi":  ["--language", "hi"],
+    "indic_sentiment_or":  ["--language", "or"],
 }
 
 
@@ -42,6 +58,8 @@ def run_benchmark(benchmark: str, model_path: str, compression: str,
     ]
     if max_samples:
         cmd += ["--max-samples", str(max_samples)]
+    # Inject language flags for multilingual benchmarks
+    cmd += BENCHMARK_EXTRA_ARGS.get(benchmark, [])
 
     logger.info(f"Running: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=False, text=True)
@@ -63,12 +81,29 @@ def main():
     parser.add_argument(
         "--benchmarks", nargs="+",
         default=["gsm8k", "boolq", "msmarco"],
-        choices=list(BENCHMARK_SCRIPTS.keys()),
+        choices=list(BENCHMARK_SCRIPTS.keys()) + ["all", "multilingual"],
     )
     parser.add_argument("--max-samples", type=int, default=None)
     parser.add_argument("--output-dir", default="results")
     parser.add_argument("--config-dir", default="config")
     args = parser.parse_args()
+
+    # Expand shorthand benchmark groups
+    ENGLISH_BENCHMARKS = ["gsm8k", "boolq", "msmarco"]
+    MULTILINGUAL_BENCHMARKS = [
+        "mgsm_hi", "indicqa_or", "indicqa_hi",
+        "indic_sentiment_hi", "indic_sentiment_or",
+    ]
+    expanded = []
+    for b in args.benchmarks:
+        if b == "all":
+            expanded = ENGLISH_BENCHMARKS + MULTILINGUAL_BENCHMARKS
+            break
+        elif b == "multilingual":
+            expanded += MULTILINGUAL_BENCHMARKS
+        else:
+            expanded.append(b)
+    args.benchmarks = expanded
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)

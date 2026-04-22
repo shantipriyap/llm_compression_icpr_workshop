@@ -42,7 +42,32 @@ bash scripts/run_kv_compress.sh
 
 # ── Final aggregation ─────────────────────────────────────────────
 echo ""
-echo ">>> Aggregating all results..."
+echo ">>> Aggregating English results..."
+python3 evaluation/collect_results.py --results-dir results/
+
+# ── 5. Multilingual Benchmarks ────────────────────────────────────
+echo ""
+echo ">>> [5/5] Running Multilingual Benchmarks (Hindi + Odia)..."
+
+MULTILINGUAL_BENCHMARKS="mgsm_hi indicqa_or indicqa_hi indic_sentiment_hi indic_sentiment_or"
+
+for MODEL_ID in "Qwen/Qwen3-8B" "microsoft/Phi-4-mini-instruct"; do
+    MODEL_KEY=$(echo "$MODEL_ID" | tr '/' '_' | tr '[:upper:]' '[:lower:]' | sed 's/qwen\/qwen3-8b/qwen3_8b/; s/microsoft\/phi-4-mini-instruct/phi4_mini/')
+    for COMPRESSION in baseline kv_compress; do
+        echo ""
+        echo "=== Multilingual: $MODEL_ID / $COMPRESSION ==="
+        python3 evaluation/run_all.py \
+            --model-id "$MODEL_ID" \
+            --model-path "$MODEL_ID" \
+            --compression "$COMPRESSION" \
+            --benchmarks multilingual \
+            --max-samples "$MAX_SAMPLES" \
+            --output-dir "results/${MODEL_KEY}/multilingual_${COMPRESSION}"
+    done
+done
+
+echo ""
+echo ">>> Aggregating all results (English + Multilingual)..."
 python3 evaluation/collect_results.py --results-dir results/
 
 echo ""

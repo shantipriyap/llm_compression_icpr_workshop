@@ -33,29 +33,58 @@ benchmarks:
 
 # Multilingual evaluation datasets
 multilingual:
-  # Hindi
-  hi_gsm8k:
-    name: "GSM8K-Hindi"
-    hf_dataset: "Vikhrmodels/GSM8k-Ru-Translated"   # use translated or ai4bharat sets
+  # Hindi — Math reasoning (parallel to English GSM8K)
+  mgsm_hi:
+    name: "MGSM-Hindi"
+    hf_dataset: "juletxara/mgsm"
+    hf_subset: "hi"
     split: "test"
     task_type: "question_answering"
     metric: "exact_match"
+    max_samples: 250   # full MGSM test set is 250 per language
     language: "hi"
+    script: "benchmarks/mgsm_eval.py"
 
-  # Odia
-  od_qa:
-    name: "Odia-QA"
+  # Hindi — Reading comprehension (IndicQA)
+  indicqa_hi:
+    name: "IndicQA-Hindi"
+    hf_dataset: "ai4bharat/IndicQA"
+    hf_subset: "hi"
+    split: "test"
+    task_type: "extractive_qa"
+    metric: "f1"
+    language: "hi"
+    script: "benchmarks/indicqa_eval.py"
+
+  # Odia — Reading comprehension (IndicQA)
+  indicqa_or:
+    name: "IndicQA-Odia"
     hf_dataset: "ai4bharat/IndicQA"
     hf_subset: "or"
     split: "test"
-    task_type: "question_answering"
+    task_type: "extractive_qa"
     metric: "f1"
     language: "or"
+    script: "benchmarks/indicqa_eval.py"
 
-  indic_sentiment:
-    name: "IndicNLU Sentiment"
+  # Hindi — Sentiment classification
+  indic_sentiment_hi:
+    name: "IndicSentiment-Hindi"
     hf_dataset: "ai4bharat/IndicSentiment"
+    hf_subset: "translation-hi"
     split: "test"
     task_type: "classification"
     metric: "accuracy"
-    languages: ["hi", "or"]
+    language: "hi"
+    script: "benchmarks/indic_sentiment_eval.py"
+
+  # Odia — Sentiment classification
+  indic_sentiment_or:
+    name: "IndicSentiment-Odia"
+    hf_dataset: "ai4bharat/IndicSentiment"
+    hf_subset: "translation-or"
+    split: "test"
+    task_type: "classification"
+    metric: "accuracy"
+    language: "or"
+    script: "benchmarks/indic_sentiment_eval.py"

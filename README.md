@@ -68,11 +68,23 @@ icpr/
 
 ## Benchmarks
 
+### English
+
 | Benchmark | Task | Metric | Samples |
 |---|---|---|---|
 | GSM8K | Math QA | Exact Match | 1319 |
 | MS MARCO | Passage QA | ROUGE-L | 1000 |
 | BoolQ | Boolean QA | Accuracy | 3270 |
+
+### Multilingual (Hindi + Odia)
+
+| Benchmark | Language | Task | Metric | Dataset |
+|---|---|---|---|---|
+| MGSM | Hindi (hi) | Math reasoning | Exact Match | `juletxara/mgsm` |
+| IndicQA | Hindi (hi) | Reading comprehension | F1 + EM | `ai4bharat/IndicQA` |
+| IndicQA | Odia (or) | Reading comprehension | F1 + EM | `ai4bharat/IndicQA` |
+| IndicSentiment | Hindi (hi) | Sentiment | Accuracy | `ai4bharat/IndicSentiment` |
+| IndicSentiment | Odia (or) | Sentiment | Accuracy | `ai4bharat/IndicSentiment` |
 
 ---
 
@@ -138,6 +150,19 @@ MAX_SAMPLES=50 ./scripts/run_baseline.sh
 | Qwen3-8B | BF16 Baseline | 59.4 | 54.9 | 58.9 |
 | Qwen3-8B | KV-compress 4-bit | 59.4 | 53.7 | 57.5 |
 | Phi-4-Mini | KV-compress 4-bit | 96.9 | 75.6 | 93.9 |
+
+### Multilingual Results (Hindi + Odia) — Pending
+
+| Model | Method | MGSM-Hi ↑ | IndicQA-Hi F1 ↑ | IndicQA-Or F1 ↑ | Sentiment-Hi ↑ | Sentiment-Or ↑ |
+|---|---|---|---|---|---|---|
+| Qwen3-8B | BF16 Baseline | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Qwen3-8B | KV-compress 4-bit | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Qwen3-8B | AWQ 4-bit | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Qwen3-8B | GPTQ 4-bit | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Phi-4-Mini | BF16 Baseline | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Phi-4-Mini | KV-compress 4-bit | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Phi-4-Mini | AWQ 4-bit | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| Phi-4-Mini | GPTQ 4-bit | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
 
 > Quantized models pushed to HuggingFace: [shantipriya/Qwen3-8B-AWQ-4bit](https://huggingface.co/shantipriya/Qwen3-8B-AWQ-4bit)
 
