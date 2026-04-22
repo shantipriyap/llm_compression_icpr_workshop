@@ -105,6 +105,41 @@ MAX_SAMPLES=50 ./scripts/run_baseline.sh
 
 ---
 
+## Results
+
+> Evaluated on 200-sample subsets. Full-set runs pending.  
+> ✅ = complete | ⏳ = pending | — = not applicable
+
+### Accuracy / ROUGE-L
+
+| Model | Method | GSM8K ↑ | BoolQ ↑ | MS MARCO ROUGE-L ↑ | VRAM (GB) |
+|---|---|---|---|---|---|
+| Qwen3-8B | BF16 Baseline | **19.0%** | **87.5%** | **0.0616** | 15.3 |
+| Qwen3-8B | KV-compress 4-bit | 19.0% | 87.5% | 0.0620 | 15.3 |
+| Qwen3-8B | AWQ 4-bit | ⏳ | ⏳ | ⏳ | — |
+| Qwen3-8B | GPTQ 4-bit | ⏳ | ⏳ | ⏳ | — |
+| Phi-4-Mini | BF16 Baseline | ⏳ | ⏳ | ⏳ | — |
+| Phi-4-Mini | KV-compress 4-bit | **85.5%** | **83.5%** | **0.1398** | 7.2 |
+| Phi-4-Mini | AWQ 4-bit | ⏳ | ⏳ | ⏳ | — |
+| Phi-4-Mini | GPTQ 4-bit | ⏳ | ⏳ | ⏳ | — |
+
+### Degradation vs BF16 Baseline (Qwen3-8B)
+
+| Method | GSM8K drop | BoolQ drop | ROUGE-L drop |
+|---|---|---|---|
+| KV-compress 4-bit | **0.0%** | **0.0%** | +0.65% (improved) |
+| AWQ 4-bit | ⏳ | ⏳ | ⏳ |
+| GPTQ 4-bit | ⏳ | ⏳ | ⏳ |
+
+### Throughput (tokens/sec)
+
+| Model | Method | GSM8K | BoolQ | MS MARCO |
+|---|---|---|---|---|
+| Qwen3-8B | BF16 Baseline | 59.4 | 54.9 | 58.9 |
+| Qwen3-8B | KV-compress 4-bit | 59.4 | 53.7 | 57.5 |
+| Phi-4-Mini | KV-compress 4-bit | 96.9 | 75.6 | 93.9 |
+
+> Quantized models pushed to HuggingFace: [shantipriya/Qwen3-8B-AWQ-4bit](https://huggingface.co/shantipriya/Qwen3-8B-AWQ-4bit)
 
 ---
 
