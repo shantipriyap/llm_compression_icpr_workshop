@@ -1,4 +1,21 @@
 models:
+  gemma3_1b:
+    name: "Gemma-3-1B-IT"
+    hf_id: "google/gemma-3-1b-it"
+    family: "gemma3"
+    size_b: 1
+    dtype: "bfloat16"
+    trust_remote_code: false
+    note: "Smallest model in the suite; 1B class for fertility/consistency baselines."
+
+  qwen3_1_7b:
+    name: "Qwen3-1.7B"
+    hf_id: "Qwen/Qwen3-1.7B"
+    family: "qwen3"
+    size_b: 1.7
+    dtype: "bfloat16"
+    trust_remote_code: true
+
   qwen3_8b:
     name: "Qwen3-8B"
     hf_id: "Qwen/Qwen3-8B"
