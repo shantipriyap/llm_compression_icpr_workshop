@@ -73,7 +73,7 @@ def _best_scores(prediction: str, gold_answers: list) -> tuple:
 def evaluate_indicqa(model, tokenizer, language: str = "or", max_samples: int = None) -> dict:
     logger.info(f"Loading IndicQA dataset (language={language}) ...")
     dataset = load_dataset(
-        "ai4bharat/IndicQA", language, split="test"
+        "ai4bharat/IndicQA", language, split="test", trust_remote_code=True
     )
 
     if max_samples:

@@ -50,13 +50,13 @@ def evaluate_indic_sentiment(
     logger.info(f"Loading IndicSentiment dataset (subset={subset}) ...")
     try:
         dataset = load_dataset(
-            "ai4bharat/IndicSentiment", subset, split="test"
+            "ai4bharat/IndicSentiment", subset, split="test", trust_remote_code=True
         )
     except Exception:
         # Fallback: try without subset name (some versions differ)
         logger.warning(f"Subset '{subset}' not found, trying direct load...")
         dataset = load_dataset(
-            "ai4bharat/IndicSentiment", split="test"
+            "ai4bharat/IndicSentiment", split="test", trust_remote_code=True
         )
 
     if max_samples:

@@ -1,0 +1,159 @@
+% ============================================================
+% ICPR 2026 Workshop — LLM Compression Benchmark Results
+% Auto-generated from benchmark outputs (200-sample subsets)
+% ============================================================
+
+% ── Table 1: Main English Benchmark Results ─────────────────────
+\begin{table*}[t]
+\centering
+\caption{Benchmark results on English tasks for Qwen3-8B and Phi-4-Mini under
+different compression methods (200-sample evaluation subsets).
+$\downarrow$ drop = absolute degradation vs.\ BF16 baseline.
+``—'' = evaluation pending.}
+\label{tab:main_results}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llccccccc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} &
+\multirow{2}{*}{\textbf{Method}} &
+\multicolumn{2}{c}{\textbf{GSM8K}} &
+\multicolumn{2}{c}{\textbf{BoolQ}} &
+\multicolumn{2}{c}{\textbf{MS MARCO}} &
+\textbf{VRAM} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+& & Acc.\ (\%) & $\downarrow$drop & Acc.\ (\%) & $\downarrow$drop & ROUGE-L & $\downarrow$drop & (GB) \\
+\midrule
+\multirow{4}{*}{Qwen3-8B}
+  & BF16 Baseline  & \textbf{19.0} & —     & \textbf{87.5} & —     & 0.0616 & —       & 15.3 \\
+  & KV-Quant 4-bit & 19.0          & 0.0\% & 87.5          & 0.0\% & 0.0620 & +0.6\%\textsuperscript{$\uparrow$} & 15.3 \\
+  & AWQ 4-bit      & —             & —     & —             & —     & —      & —       & — \\
+  & GPTQ 4-bit     & —             & —     & —             & —     & —      & —       & — \\
+\midrule
+\multirow{4}{*}{Phi-4-Mini (3.8B)}
+  & BF16 Baseline  & —             & —     & —             & —     & —      & —       & — \\
+  & KV-Quant 4-bit & \textbf{85.5} & —     & \textbf{83.5} & —     & \textbf{0.1398} & — & 7.2 \\
+  & AWQ 4-bit      & —             & —     & —             & —     & —      & —       & — \\
+  & GPTQ 4-bit     & —             & —     & —             & —     & —      & —       & — \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+  \small
+  \item \textsuperscript{$\uparrow$} Positive value indicates improvement over baseline.
+  \item ``—'' indicates evaluation in progress. Full results will be updated.
+\end{tablenotes}
+\end{table*}
+
+
+% ── Table 2: Throughput Comparison ──────────────────────────────
+\begin{table}[t]
+\centering
+\caption{Inference throughput (tokens/sec) and average latency per sample
+across benchmarks. Evaluated on NVIDIA RTX PRO 6000 Blackwell (102 GB VRAM).}
+\label{tab:throughput}
+\small
+\begin{tabular}{llccc}
+\toprule
+\textbf{Model} & \textbf{Method} & \textbf{GSM8K} & \textbf{BoolQ} & \textbf{MS MARCO} \\
+               &                 & (tok/s)        & (tok/s)        & (tok/s) \\
+\midrule
+\multirow{2}{*}{Qwen3-8B}
+  & BF16 Baseline  & 59.4 & 54.9 & 58.9 \\
+  & KV-Quant 4-bit & 59.4 & 53.7 & 57.5 \\
+\midrule
+Phi-4-Mini & KV-Quant 4-bit & 96.9 & 75.6 & 93.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ── Table 3: Multilingual Results (Hindi + Odia) ─────────────────
+\begin{table*}[t]
+\centering
+\caption{Multilingual robustness evaluation on Hindi and Odia benchmarks.
+Compression-induced degradation vs.\ BF16 baseline.
+``—'' = evaluation in progress.}
+\label{tab:multilingual_results}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llcccccc}
+\toprule
+\textbf{Model} & \textbf{Method} &
+\textbf{MGSM-Hi} & \textbf{IndicQA-Hi} & \textbf{IndicQA-Or} &
+\textbf{Sent.-Hi} & \textbf{Sent.-Or} \\
+& & (Acc.\%) & (F1) & (F1) & (Acc.\%) & (Acc.\%) \\
+\midrule
+\multirow{4}{*}{Qwen3-8B}
+  & BF16 Baseline  & — & — & — & — & — \\
+  & KV-Quant 4-bit & — & — & — & — & — \\
+  & AWQ 4-bit      & — & — & — & — & — \\
+  & GPTQ 4-bit     & — & — & — & — & — \\
+\midrule
+\multirow{4}{*}{Phi-4-Mini}
+  & BF16 Baseline  & — & — & — & — & — \\
+  & KV-Quant 4-bit & — & — & — & — & — \\
+  & AWQ 4-bit      & — & — & — & — & — \\
+  & GPTQ 4-bit     & — & — & — & — & — \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+  \small
+  \item Datasets: MGSM~\cite{shi2023language}, IndicQA~\cite{doddapaneni2023towards},
+        IndicSentiment~\cite{doddapaneni2023towards}.
+  \item ``Hi'' = Hindi, ``Or'' = Odia, ``Sent.'' = IndicSentiment.
+\end{tablenotes}
+\end{table*}
+
+
+% ── Table 4: Dataset Summary ─────────────────────────────────────
+\begin{table}[t]
+\centering
+\caption{Evaluation benchmarks used in this study.}
+\label{tab:benchmarks}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Benchmark} & \textbf{Language} & \textbf{Task} & \textbf{Metric} \\
+\midrule
+GSM8K~\cite{cobbe2021gsm8k}         & English & Math reasoning    & Acc.\ (EM) \\
+BoolQ~\cite{clark2019boolq}         & English & Boolean QA        & Accuracy \\
+MS MARCO~\cite{nguyen2016ms}        & English & Passage QA        & ROUGE-L \\
+MGSM~\cite{shi2023language}         & Hindi   & Math reasoning    & Acc.\ (EM) \\
+IndicQA~\cite{doddapaneni2023towards} & Hindi, Odia & Reading comp.\ & F1 \\
+IndicSentiment~\cite{doddapaneni2023towards} & Hindi, Odia & Sentiment & Accuracy \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ── Key citations (add to your .bib file) ───────────────────────
+% @article{shi2023language,
+%   title={Language Models are Multilingual Chain-of-Thought Reasoners},
+%   author={Shi, Freda and others},
+%   journal={ICLR},
+%   year={2023}
+% }
+% @article{doddapaneni2023towards,
+%   title={Towards Leaving No Indic Language Behind},
+%   author={Doddapaneni, Sumanth and others},
+%   journal={ACL},
+%   year={2023}
+% }
+% @article{cobbe2021gsm8k,
+%   title={Training Verifiers to Solve Math Word Problems},
+%   author={Cobbe, Karl and others},
+%   year={2021},
+%   journal={arXiv:2110.14168}
+% }
+% @article{clark2019boolq,
+%   title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
+%   author={Clark, Christopher and others},
+%   journal={NAACL},
+%   year={2019}
+% }
+% @article{nguyen2016ms,
+%   title={MS MARCO: A Human Generated Machine Reading Comprehension Dataset},
+%   author={Nguyen, Tri and others},
+%   year={2016},
+%   journal={arXiv:1611.09268}
+% }
