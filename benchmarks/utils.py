@@ -15,6 +15,22 @@ logger = logging.getLogger(__name__)
 
 
 # ------------------------------------------------------------------ #
+# Compatibility shim: LossKwargs was renamed in transformers 5.x       #
+# ------------------------------------------------------------------ #
+try:
+    from transformers.utils import LossKwargs  # noqa: F401
+except ImportError:
+    from dataclasses import dataclass
+    import transformers.utils as _tu
+
+    @dataclass
+    class LossKwargs:
+        pass
+
+    _tu.LossKwargs = LossKwargs
+
+
+# ------------------------------------------------------------------ #
 # Model loading                                                        #
 # ------------------------------------------------------------------ #
 
@@ -43,20 +59,19 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
         )
 
     elif compression_method == "gptq":
-        from auto_gptq import AutoGPTQForCausalLM
-        model = AutoGPTQForCausalLM.from_quantized(
+        # Use transformers-native GPTQ loading (no auto_gptq dependency)
+        model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            use_safetensors=True,
             trust_remote_code=True,
             device_map="auto",
         )
 
     elif compression_method == "awq":
-        from awq import AutoAWQForCausalLM
-        model = AutoAWQForCausalLM.from_quantized(
+        # Use transformers-native AWQ loading (no autoawq dependency for inference)
+        model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            fuse_layers=True,
             trust_remote_code=True,
+            device_map="auto",
         )
 
     elif compression_method == "kv_compress":
