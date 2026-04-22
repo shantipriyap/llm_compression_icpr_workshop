@@ -1,0 +1,10 @@
+{
+  "benchmark": "boolq",
+  "num_samples": 200,
+  "accuracy": 0.875,
+  "avg_latency_sec": 0.14901058197021486,
+  "tokens_per_sec": 53.687462287739336,
+  "gpu_memory_mb": 15630.73095703125,
+  "model": "Qwen/Qwen3-8B",
+  "compression": "kv_compress"
+}

@@ -1,0 +1,6 @@
+model,compression,gsm8k_accuracy,gsm8k_tps,gsm8k_gpu_mb,boolq_accuracy,boolq_tps,boolq_gpu_mb,msmarco_rouge_l,msmarco_tps,msmarco_gpu_mb,gsm8k_accuracy_drop%,boolq_accuracy_drop%,msmarco_rouge_l_drop%
+microsoft/Phi-4-mini-instruct,baseline,,,,,,,,,,,,
+microsoft/Phi-4-mini-instruct,kv_compress,0.855,96.9,7324.8,0.835,75.6,7324.8,0.1398,93.9,7324.8,,,
+Qwen/Qwen3-8B,awq,,,,,,,,,,,,
+Qwen/Qwen3-8B,baseline,0.19,59.4,15630.7,0.875,54.9,15630.7,0.0616,58.9,15630.7,0.0,0.0,0.0
+Qwen/Qwen3-8B,kv_compress,0.19,59.4,15630.7,0.875,53.7,15630.7,0.062,57.5,15630.7,0.0,0.0,0.65

@@ -1,0 +1,11 @@
+{
+  "benchmark": "msmarco",
+  "num_samples": 200,
+  "rouge_l": 0.06198501123121346,
+  "rouge_1": 0.07264112302152523,
+  "avg_latency_sec": 2.2280237770080564,
+  "tokens_per_sec": 57.450015265046765,
+  "gpu_memory_mb": 15630.73095703125,
+  "model": "Qwen/Qwen3-8B",
+  "compression": "kv_compress"
+}

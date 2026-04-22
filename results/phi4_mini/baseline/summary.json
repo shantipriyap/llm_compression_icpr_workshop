@@ -1,0 +1,16 @@
+{
+  "model_id": "microsoft/Phi-4-mini-instruct",
+  "model_path": "microsoft/Phi-4-mini-instruct",
+  "compression": "baseline",
+  "results": {
+    "gsm8k": {
+      "error": "exit code 1"
+    },
+    "boolq": {
+      "error": "exit code 1"
+    },
+    "msmarco": {
+      "error": "exit code 1"
+    }
+  }
+}

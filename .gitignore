@@ -10,10 +10,9 @@ build/
 # Quantized model checkpoints (large files)
 quantized/
 
-# Results (generated locally, not committed)
-results/*.json
-results/*.csv
-results/**/
+# Quantized weights inside results (large)
+results/**/*.bin
+results/**/*.safetensors
 
 # HuggingFace cache
 .cache/

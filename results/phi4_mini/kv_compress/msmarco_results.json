@@ -1,0 +1,11 @@
+{
+  "benchmark": "msmarco",
+  "num_samples": 200,
+  "rouge_l": 0.1398263186806996,
+  "rouge_1": 0.1513397050054873,
+  "avg_latency_sec": 0.33901281356811525,
+  "tokens_per_sec": 93.89025643304967,
+  "gpu_memory_mb": 7324.75634765625,
+  "model": "microsoft/Phi-4-mini-instruct",
+  "compression": "kv_compress"
+}

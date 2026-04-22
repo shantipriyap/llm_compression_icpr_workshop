@@ -1,0 +1,10 @@
+{
+  "benchmark": "boolq",
+  "num_samples": 200,
+  "accuracy": 0.835,
+  "avg_latency_sec": 0.026449700593948366,
+  "tokens_per_sec": 75.6152226712765,
+  "gpu_memory_mb": 7324.75634765625,
+  "model": "microsoft/Phi-4-mini-instruct",
+  "compression": "kv_compress"
+}

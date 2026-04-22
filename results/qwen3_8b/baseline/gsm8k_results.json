@@ -1,0 +1,10 @@
+{
+  "benchmark": "gsm8k",
+  "num_samples": 200,
+  "accuracy": 0.19,
+  "avg_latency_sec": 5.047567071914673,
+  "tokens_per_sec": 59.41080043662456,
+  "gpu_memory_mb": 15630.7314453125,
+  "model": "Qwen/Qwen3-8B",
+  "compression": "baseline"
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "Qwen/Qwen3-8B",
+  "model_path": "Qwen/Qwen3-8B",
+  "compression": "baseline",
+  "results": {
+    "gsm8k": {
+      "benchmark": "gsm8k",
+      "num_samples": 200,
+      "accuracy": 0.19,
+      "avg_latency_sec": 5.047567071914673,
+      "tokens_per_sec": 59.41080043662456,
+      "gpu_memory_mb": 15630.7314453125,
+      "model": "Qwen/Qwen3-8B",
+      "compression": "baseline"
+    },
+    "boolq": {
+      "benchmark": "boolq",
+      "num_samples": 200,
+      "accuracy": 0.875,
+      "avg_latency_sec": 0.14572752714157106,
+      "tokens_per_sec": 54.89697215700489,
+      "gpu_memory_mb": 15630.7314453125,
+      "model": "Qwen/Qwen3-8B",
+      "compression": "baseline"
+    },
+    "msmarco": {
+      "benchmark": "msmarco",
+      "num_samples": 200,
+      "rouge_l": 0.061638459632455816,
+      "rouge_1": 0.07274789670486626,
+      "avg_latency_sec": 2.171381098031998,
+      "tokens_per_sec": 58.948657200714834,
+      "gpu_memory_mb": 15630.7314453125,
+      "model": "Qwen/Qwen3-8B",
+      "compression": "baseline"
+    }
+  }
+}
