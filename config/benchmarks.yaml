@@ -1,0 +1,61 @@
+benchmarks:
+  gsm8k:
+    name: "GSM8K"
+    hf_dataset: "openai/gsm8k"
+    hf_subset: "main"
+    split: "test"
+    task_type: "question_answering"
+    metric: "exact_match"
+    max_samples: 1319   # full test set
+    prompt_template: "gsm8k"
+    languages: ["en"]   # English only; for multilingual use translated versions
+
+  msmarco:
+    name: "MS MARCO"
+    hf_dataset: "ms_marco"
+    hf_subset: "v2.1"
+    split: "validation"
+    task_type: "question_answering"
+    metric: "rouge_l"
+    max_samples: 1000
+    prompt_template: "msmarco"
+    languages: ["en"]
+
+  boolq:
+    name: "BoolQ"
+    hf_dataset: "google/boolq"
+    split: "validation"
+    task_type: "classification"
+    metric: "accuracy"
+    max_samples: 3270   # full validation set
+    prompt_template: "boolq"
+    languages: ["en"]
+
+# Multilingual evaluation datasets
+multilingual:
+  # Hindi
+  hi_gsm8k:
+    name: "GSM8K-Hindi"
+    hf_dataset: "Vikhrmodels/GSM8k-Ru-Translated"   # use translated or ai4bharat sets
+    split: "test"
+    task_type: "question_answering"
+    metric: "exact_match"
+    language: "hi"
+
+  # Odia
+  od_qa:
+    name: "Odia-QA"
+    hf_dataset: "ai4bharat/IndicQA"
+    hf_subset: "or"
+    split: "test"
+    task_type: "question_answering"
+    metric: "f1"
+    language: "or"
+
+  indic_sentiment:
+    name: "IndicNLU Sentiment"
+    hf_dataset: "ai4bharat/IndicSentiment"
+    split: "test"
+    task_type: "classification"
+    metric: "accuracy"
+    languages: ["hi", "or"]

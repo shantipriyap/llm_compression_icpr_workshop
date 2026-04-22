@@ -1,0 +1,41 @@
+models:
+  qwen3_8b:
+    name: "Qwen3-8B"
+    hf_id: "Qwen/Qwen3-8B"
+    family: "qwen3"
+    size_b: 8
+    dtype: "bfloat16"
+    trust_remote_code: true
+
+  qwen3_35b:
+    name: "Qwen3.6-35B-A3B"
+    hf_id: "Qwen/Qwen3-235B-A22B"   # update when released
+    family: "qwen3"
+    size_b: 35
+    dtype: "bfloat16"
+    trust_remote_code: true
+    is_moe: true
+
+  gemma4_12b:
+    name: "Gemma4-12B"
+    hf_id: "google/gemma-4-12b"      # update when released
+    family: "gemma4"
+    size_b: 12
+    dtype: "bfloat16"
+    trust_remote_code: false
+
+  gemma4_27b:
+    name: "Gemma4-27B"
+    hf_id: "google/gemma-4-27b"      # update when released
+    family: "gemma4"
+    size_b: 27
+    dtype: "bfloat16"
+    trust_remote_code: false
+
+  phi4_mini:
+    name: "Phi-4-Mini"
+    hf_id: "microsoft/Phi-4-mini-instruct"
+    family: "phi4"
+    size_b: 3.8
+    dtype: "bfloat16"
+    trust_remote_code: true

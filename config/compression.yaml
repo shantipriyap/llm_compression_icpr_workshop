@@ -1,0 +1,44 @@
+compression:
+  baseline_fp16:
+    name: "FP16 Baseline"
+    method: "baseline"
+    dtype: "float16"
+    bits: 16
+
+  baseline_bf16:
+    name: "BF16 Baseline"
+    method: "baseline"
+    dtype: "bfloat16"
+    bits: 16
+
+  gptq_4bit:
+    name: "GPTQ 4-bit"
+    method: "gptq"
+    bits: 4
+    group_size: 128
+    desc_act: true
+    damp_percent: 0.01
+    calibration_dataset: "wikitext2"
+    calibration_samples: 128
+
+  awq_4bit:
+    name: "AWQ 4-bit"
+    method: "awq"
+    bits: 4
+    group_size: 128
+    zero_point: true
+    version: "GEMM"
+
+  fp8:
+    name: "FP8"
+    method: "fp8"
+    bits: 8
+    enabled_if_supported: true
+
+  kv_cache_compress:
+    name: "KV-Cache Compression (TurboQuant-style)"
+    method: "kv_compress"
+    kv_bits: 4
+    kv_group_size: 64
+    kv_cache_dtype: "fp8"
+    residual_length: 128
