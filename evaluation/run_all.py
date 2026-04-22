@@ -29,7 +29,7 @@ BENCHMARK_SCRIPTS = {
     "msmarco": "benchmarks/msmarco_eval.py",
     "boolq":   "benchmarks/boolq_eval.py",
     # Multilingual benchmarks
-    "mgsm_hi":             "benchmarks/mgsm_eval.py",
+    "mgsm_bn":             "benchmarks/mgsm_eval.py",
     "indicqa_or":          "benchmarks/indicqa_eval.py",
     "indicqa_hi":          "benchmarks/indicqa_eval.py",
     "indic_sentiment_hi":  "benchmarks/indic_sentiment_eval.py",
@@ -38,7 +38,7 @@ BENCHMARK_SCRIPTS = {
 
 # Extra CLI flags injected per benchmark key
 BENCHMARK_EXTRA_ARGS = {
-    "mgsm_hi":             ["--language", "hi"],
+    "mgsm_bn":             ["--language", "bn"],
     "indicqa_or":          ["--language", "or"],
     "indicqa_hi":          ["--language", "hi"],
     "indic_sentiment_hi":  ["--language", "hi"],
@@ -76,7 +76,7 @@ def main():
     parser.add_argument(
         "--compression",
         required=True,
-        choices=["baseline", "gptq", "awq", "kv_compress", "fp8"],
+        choices=["baseline", "gptq", "awq", "kv_compress", "fp8", "int4_bnb", "int4_bnb_kv"],
     )
     parser.add_argument(
         "--benchmarks", nargs="+",
@@ -91,7 +91,7 @@ def main():
     # Expand shorthand benchmark groups
     ENGLISH_BENCHMARKS = ["gsm8k", "boolq", "msmarco"]
     MULTILINGUAL_BENCHMARKS = [
-        "mgsm_hi", "indicqa_or", "indicqa_hi",
+        "mgsm_bn", "indicqa_or", "indicqa_hi",
         "indic_sentiment_hi", "indic_sentiment_or",
     ]
     expanded = []

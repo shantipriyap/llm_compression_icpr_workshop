@@ -42,3 +42,27 @@ compression:
     kv_group_size: 64
     kv_cache_dtype: "fp8"
     residual_length: 128
+
+  int4_bnb:
+    name: "BitsAndBytes NF4 4-bit (QLoRA-style)"
+    method: "int4_bnb"
+    bits: 4
+    quant_type: "nf4"
+    compute_dtype: "bfloat16"
+    double_quant: true
+    note: >-
+      Primary method for 70B models. Uses bnb_4bit_use_double_quant=True
+      (QLoRA double quantization). ~35GB VRAM for 70B; ~4.5GB for 8B.
+
+  int4_bnb_kv:
+    name: "BitsAndBytes NF4 4-bit + KV-Cache Compression"
+    method: "int4_bnb_kv"
+    bits: 4
+    quant_type: "nf4"
+    compute_dtype: "bfloat16"
+    double_quant: true
+    kv_bits: 4
+    kv_group_size: 64
+    note: >-
+      Combined weight (NF4) + KV-cache (4-bit) compression for 70B models.
+      Maximum memory efficiency at cost of potential quality degradation.

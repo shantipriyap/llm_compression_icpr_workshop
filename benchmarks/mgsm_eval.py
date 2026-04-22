@@ -1,8 +1,10 @@
 """
 MGSM (Multilingual Grade School Math) evaluation script.
 
-Uses the juletxara/mgsm dataset (Hindi subset by default).
-Measures exact-match accuracy on arithmetic word problems in Hindi.
+Uses the juletxara/mgsm dataset.
+Available Indic language: Bengali (bn). Hindi is not in juletxara/mgsm;
+default is Bengali as the closest available Indic language.
+Measures exact-match accuracy on arithmetic word problems.
 Tests whether LLM compression degrades multilingual math reasoning.
 """
 
@@ -29,9 +31,17 @@ Problem: {question}
 Solution:"""
 
 
-def evaluate_mgsm(model, tokenizer, language: str = "hi", max_samples: int = None) -> dict:
+# juletxara/mgsm does not include Hindi ('hi'); available Indic language is Bengali ('bn').
+_MGSM_LANG_MAP = {"hi": "bn"}  # map unsupported languages to closest available
+
+
+def evaluate_mgsm(model, tokenizer, language: str = "bn", max_samples: int = None) -> dict:
+    mapped = _MGSM_LANG_MAP.get(language, language)
+    if mapped != language:
+        logger.warning(f"MGSM: language '{language}' not available; using '{mapped}' as proxy.")
+    language = mapped
     logger.info(f"Loading MGSM dataset (language={language}) ...")
-    dataset = load_dataset("juletxara/mgsm", language, split="test")
+    dataset = load_dataset("juletxara/mgsm", language, split="test", trust_remote_code=False)
 
     if max_samples:
         dataset = dataset.select(range(min(max_samples, len(dataset))))

@@ -1,0 +1,22 @@
+{
+  "model_id": "Qwen/Qwen3-8B",
+  "model_path": "Qwen/Qwen3-8B",
+  "compression": "baseline",
+  "results": {
+    "mgsm_hi": {
+      "error": "exit code 1"
+    },
+    "indicqa_or": {
+      "error": "exit code 1"
+    },
+    "indicqa_hi": {
+      "error": "exit code 1"
+    },
+    "indic_sentiment_hi": {
+      "error": "exit code 1"
+    },
+    "indic_sentiment_or": {
+      "error": "exit code 1"
+    }
+  }
+}

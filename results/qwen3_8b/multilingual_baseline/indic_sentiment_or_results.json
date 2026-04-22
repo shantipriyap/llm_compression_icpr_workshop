@@ -1,0 +1,11 @@
+{
+  "benchmark": "indic_sentiment_or",
+  "language": "or",
+  "num_samples": 200,
+  "accuracy": 0.0,
+  "avg_latency_sec": 0.14352441787719727,
+  "tokens_per_sec": 55.739644294150565,
+  "gpu_memory_mb": 15630.73095703125,
+  "model": "Qwen/Qwen3-8B",
+  "compression": "baseline"
+}

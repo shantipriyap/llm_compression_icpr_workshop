@@ -47,7 +47,10 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
         (model, tokenizer) tuple.
     """
     logger.info(f"Loading model '{model_id_or_path}' with method '{compression_method}'")
-    tokenizer = AutoTokenizer.from_pretrained(model_id_or_path, trust_remote_code=True)
+    hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_id_or_path, trust_remote_code=True, token=hf_token
+    )
 
     if compression_method in ("baseline", "fp16", "bf16"):
         dtype = torch.float16 if compression_method == "fp16" else torch.bfloat16
@@ -56,22 +59,23 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
             trust_remote_code=True,
             torch_dtype=dtype,
             device_map="auto",
+            token=hf_token,
         )
 
     elif compression_method == "gptq":
-        # Use transformers-native GPTQ loading (no auto_gptq dependency)
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
             trust_remote_code=True,
             device_map="auto",
+            token=hf_token,
         )
 
     elif compression_method == "awq":
-        # Use transformers-native AWQ loading (no autoawq dependency for inference)
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
             trust_remote_code=True,
             device_map="auto",
+            token=hf_token,
         )
 
     elif compression_method == "kv_compress":
@@ -82,8 +86,30 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
             trust_remote_code=True,
             torch_dtype=torch.bfloat16,
             device_map="auto",
+            token=hf_token,
         )
         KVCacheCompressor(model, cfg)
+
+    elif compression_method in ("int4_bnb", "int4_bnb_kv"):
+        # 4-bit NF4 via bitsandbytes — primary method for 70B models
+        from transformers import BitsAndBytesConfig
+        bnb_cfg = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,   # QLoRA-style double quant
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id_or_path,
+            trust_remote_code=True,
+            quantization_config=bnb_cfg,
+            device_map="auto",
+            token=hf_token,
+        )
+        if compression_method == "int4_bnb_kv":
+            from compression.kv_cache_compress import KVCacheCompressor
+            cfg = compression_cfg.get("kv_cache_compress", {})
+            KVCacheCompressor(model, cfg)
 
     else:
         raise ValueError(f"Unknown compression method: {compression_method}")

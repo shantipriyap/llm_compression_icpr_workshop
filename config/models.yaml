@@ -39,3 +39,32 @@ models:
     size_b: 3.8
     dtype: "bfloat16"
     trust_remote_code: true
+
+  llama3_8b:
+    name: "Llama-3.1-8B-Instruct"
+    hf_id: "meta-llama/Llama-3.1-8B-Instruct"
+    family: "llama3"
+    size_b: 8
+    dtype: "bfloat16"
+    trust_remote_code: false
+    requires_hf_token: true   # set HF_TOKEN env var before running
+
+  gemma3_12b:
+    name: "Gemma-3-12B-IT"
+    hf_id: "google/gemma-3-12b-it"
+    family: "gemma3"
+    size_b: 12
+    dtype: "bfloat16"
+    trust_remote_code: false
+
+  llama3_70b:
+    name: "Llama-3.1-70B-Instruct"
+    hf_id: "meta-llama/Llama-3.1-70B-Instruct"
+    family: "llama3"
+    size_b: 70
+    dtype: "int4_bnb"          # BF16 baseline won't fit (140GB); use 4-bit NF4
+    trust_remote_code: false
+    requires_hf_token: true
+    note: >-
+      Loaded with BitsAndBytesConfig NF4 double-quant (~35GB VRAM).
+      Represents the 70B class for compression-vs-quality analysis.

@@ -33,16 +33,17 @@ benchmarks:
 
 # Multilingual evaluation datasets
 multilingual:
-  # Hindi — Math reasoning (parallel to English GSM8K)
-  mgsm_hi:
-    name: "MGSM-Hindi"
+  # Bengali — Math reasoning via MGSM (Hindi not available in juletxara/mgsm;
+  # Bengali is the closest available Indic language in the dataset)
+  mgsm_bn:
+    name: "MGSM-Bengali"
     hf_dataset: "juletxara/mgsm"
-    hf_subset: "hi"
+    hf_subset: "bn"
     split: "test"
     task_type: "question_answering"
     metric: "exact_match"
     max_samples: 250   # full MGSM test set is 250 per language
-    language: "hi"
+    language: "bn"
     script: "benchmarks/mgsm_eval.py"
 
   # Hindi — Reading comprehension (IndicQA)

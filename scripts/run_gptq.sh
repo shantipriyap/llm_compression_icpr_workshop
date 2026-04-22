@@ -7,18 +7,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT"
 
-MAX_SAMPLES=${MAX_SAMPLES:-200}   # Override with: MAX_SAMPLES=1319 ./scripts/run_gptq.sh
-QUANT_OUT="./quantized/gptq"
+export HF_TOKEN="${HF_TOKEN:-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}"
+export HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"
 
 declare -A MODELS=(
     ["qwen3_8b"]="Qwen/Qwen3-8B"
     ["phi4_mini"]="microsoft/Phi-4-mini-instruct"
-    # ["gemma4_12b"]="google/gemma-4-12b"  # uncomment when available
+    ["llama3_8b"]="meta-llama/Llama-3.1-8B-Instruct"
+    ["gemma3_12b"]="google/gemma-3-12b-it"
 )
 
 for MODEL_KEY in "${!MODELS[@]}"; do
-    MODEL_ID="${MODELS[$MODEL_KEY]}"
-    QUANT_PATH="$QUANT_OUT/$MODEL_KEY"
+    QUANT_PATH="./quantized/gptq/$MODEL_KEY"
     RESULT_DIR="./results/$MODEL_KEY/gptq"
 
     echo "============================================="
@@ -37,7 +37,6 @@ for MODEL_KEY in "${!MODELS[@]}"; do
         --model-path "$QUANT_PATH" \
         --compression gptq \
         --benchmarks gsm8k boolq msmarco \
-        --max-samples "$MAX_SAMPLES" \
         --output-dir "$RESULT_DIR"
 
     echo "Done: $MODEL_KEY → $RESULT_DIR"
