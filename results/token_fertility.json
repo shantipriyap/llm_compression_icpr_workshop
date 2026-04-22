@@ -1,0 +1,262 @@
+{
+  "Qwen/Qwen3-0.6B": {
+    "en": {
+      "mean_fertility": 1.3,
+      "mean_tokens_per_sentence": 11.4,
+      "mean_words_per_sentence": 8.8
+    },
+    "hi": {
+      "mean_fertility": 5.0,
+      "mean_tokens_per_sentence": 46.9,
+      "mean_words_per_sentence": 9.4
+    },
+    "mr": {
+      "mean_fertility": 7.018,
+      "mean_tokens_per_sentence": 50.0,
+      "mean_words_per_sentence": 7.1
+    },
+    "gu": {
+      "mean_fertility": 9.21,
+      "mean_tokens_per_sentence": 71.4,
+      "mean_words_per_sentence": 7.8
+    },
+    "or": {
+      "mean_fertility": 13.397,
+      "mean_tokens_per_sentence": 97.1,
+      "mean_words_per_sentence": 7.2
+    },
+    "bn": {
+      "mean_fertility": 7.784,
+      "mean_tokens_per_sentence": 49.6,
+      "mean_words_per_sentence": 6.4
+    },
+    "ta": {
+      "mean_fertility": 9.566,
+      "mean_tokens_per_sentence": 63.4,
+      "mean_words_per_sentence": 6.6
+    },
+    "te": {
+      "mean_fertility": 12.294,
+      "mean_tokens_per_sentence": 78.4,
+      "mean_words_per_sentence": 6.4
+    },
+    "kn": {
+      "mean_fertility": 12.12,
+      "mean_tokens_per_sentence": 75.8,
+      "mean_words_per_sentence": 6.2
+    },
+    "ml": {
+      "mean_fertility": 12.76,
+      "mean_tokens_per_sentence": 79.8,
+      "mean_words_per_sentence": 6.2
+    }
+  },
+  "Qwen/Qwen3-1.7B": {
+    "en": {
+      "mean_fertility": 1.3,
+      "mean_tokens_per_sentence": 11.4,
+      "mean_words_per_sentence": 8.8
+    },
+    "hi": {
+      "mean_fertility": 5.0,
+      "mean_tokens_per_sentence": 46.9,
+      "mean_words_per_sentence": 9.4
+    },
+    "mr": {
+      "mean_fertility": 7.018,
+      "mean_tokens_per_sentence": 50.0,
+      "mean_words_per_sentence": 7.1
+    },
+    "gu": {
+      "mean_fertility": 9.21,
+      "mean_tokens_per_sentence": 71.4,
+      "mean_words_per_sentence": 7.8
+    },
+    "or": {
+      "mean_fertility": 13.397,
+      "mean_tokens_per_sentence": 97.1,
+      "mean_words_per_sentence": 7.2
+    },
+    "bn": {
+      "mean_fertility": 7.784,
+      "mean_tokens_per_sentence": 49.6,
+      "mean_words_per_sentence": 6.4
+    },
+    "ta": {
+      "mean_fertility": 9.566,
+      "mean_tokens_per_sentence": 63.4,
+      "mean_words_per_sentence": 6.6
+    },
+    "te": {
+      "mean_fertility": 12.294,
+      "mean_tokens_per_sentence": 78.4,
+      "mean_words_per_sentence": 6.4
+    },
+    "kn": {
+      "mean_fertility": 12.12,
+      "mean_tokens_per_sentence": 75.8,
+      "mean_words_per_sentence": 6.2
+    },
+    "ml": {
+      "mean_fertility": 12.76,
+      "mean_tokens_per_sentence": 79.8,
+      "mean_words_per_sentence": 6.2
+    }
+  },
+  "microsoft/Phi-4-mini-instruct": {
+    "en": {
+      "mean_fertility": 1.243,
+      "mean_tokens_per_sentence": 10.9,
+      "mean_words_per_sentence": 8.8
+    },
+    "hi": {
+      "mean_fertility": 1.84,
+      "mean_tokens_per_sentence": 17.2,
+      "mean_words_per_sentence": 9.4
+    },
+    "mr": {
+      "mean_fertility": 2.789,
+      "mean_tokens_per_sentence": 19.9,
+      "mean_words_per_sentence": 7.1
+    },
+    "gu": {
+      "mean_fertility": 2.645,
+      "mean_tokens_per_sentence": 20.5,
+      "mean_words_per_sentence": 7.8
+    },
+    "or": {
+      "mean_fertility": 6.69,
+      "mean_tokens_per_sentence": 48.5,
+      "mean_words_per_sentence": 7.2
+    },
+    "bn": {
+      "mean_fertility": 3.118,
+      "mean_tokens_per_sentence": 19.9,
+      "mean_words_per_sentence": 6.4
+    },
+    "ta": {
+      "mean_fertility": 3.321,
+      "mean_tokens_per_sentence": 22.0,
+      "mean_words_per_sentence": 6.6
+    },
+    "te": {
+      "mean_fertility": 3.608,
+      "mean_tokens_per_sentence": 23.0,
+      "mean_words_per_sentence": 6.4
+    },
+    "kn": {
+      "mean_fertility": 3.78,
+      "mean_tokens_per_sentence": 23.6,
+      "mean_words_per_sentence": 6.2
+    },
+    "ml": {
+      "mean_fertility": 3.62,
+      "mean_tokens_per_sentence": 22.6,
+      "mean_words_per_sentence": 6.2
+    }
+  },
+  "Qwen/Qwen3-8B": {
+    "en": {
+      "mean_fertility": 1.3,
+      "mean_tokens_per_sentence": 11.4,
+      "mean_words_per_sentence": 8.8
+    },
+    "hi": {
+      "mean_fertility": 5.0,
+      "mean_tokens_per_sentence": 46.9,
+      "mean_words_per_sentence": 9.4
+    },
+    "mr": {
+      "mean_fertility": 7.018,
+      "mean_tokens_per_sentence": 50.0,
+      "mean_words_per_sentence": 7.1
+    },
+    "gu": {
+      "mean_fertility": 9.21,
+      "mean_tokens_per_sentence": 71.4,
+      "mean_words_per_sentence": 7.8
+    },
+    "or": {
+      "mean_fertility": 13.397,
+      "mean_tokens_per_sentence": 97.1,
+      "mean_words_per_sentence": 7.2
+    },
+    "bn": {
+      "mean_fertility": 7.784,
+      "mean_tokens_per_sentence": 49.6,
+      "mean_words_per_sentence": 6.4
+    },
+    "ta": {
+      "mean_fertility": 9.566,
+      "mean_tokens_per_sentence": 63.4,
+      "mean_words_per_sentence": 6.6
+    },
+    "te": {
+      "mean_fertility": 12.294,
+      "mean_tokens_per_sentence": 78.4,
+      "mean_words_per_sentence": 6.4
+    },
+    "kn": {
+      "mean_fertility": 12.12,
+      "mean_tokens_per_sentence": 75.8,
+      "mean_words_per_sentence": 6.2
+    },
+    "ml": {
+      "mean_fertility": 12.76,
+      "mean_tokens_per_sentence": 79.8,
+      "mean_words_per_sentence": 6.2
+    }
+  },
+  "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+    "en": {
+      "mean_fertility": 1.414,
+      "mean_tokens_per_sentence": 12.4,
+      "mean_words_per_sentence": 8.8
+    },
+    "hi": {
+      "mean_fertility": 5.853,
+      "mean_tokens_per_sentence": 54.9,
+      "mean_words_per_sentence": 9.4
+    },
+    "mr": {
+      "mean_fertility": 7.965,
+      "mean_tokens_per_sentence": 56.8,
+      "mean_words_per_sentence": 7.1
+    },
+    "gu": {
+      "mean_fertility": 15.726,
+      "mean_tokens_per_sentence": 121.9,
+      "mean_words_per_sentence": 7.8
+    },
+    "or": {
+      "mean_fertility": 17.948,
+      "mean_tokens_per_sentence": 130.1,
+      "mean_words_per_sentence": 7.2
+    },
+    "bn": {
+      "mean_fertility": 9.196,
+      "mean_tokens_per_sentence": 58.6,
+      "mean_words_per_sentence": 6.4
+    },
+    "ta": {
+      "mean_fertility": 10.415,
+      "mean_tokens_per_sentence": 69.0,
+      "mean_words_per_sentence": 6.6
+    },
+    "te": {
+      "mean_fertility": 20.686,
+      "mean_tokens_per_sentence": 131.9,
+      "mean_words_per_sentence": 6.4
+    },
+    "kn": {
+      "mean_fertility": 21.04,
+      "mean_tokens_per_sentence": 131.5,
+      "mean_words_per_sentence": 6.2
+    },
+    "ml": {
+      "mean_fertility": 11.48,
+      "mean_tokens_per_sentence": 71.8,
+      "mean_words_per_sentence": 6.2
+    }
+  }
+}
