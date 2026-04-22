@@ -176,7 +176,22 @@ def load_model(model_id: str, use_4bit_nf4: bool, hf_token: str | None):
 
 def generate_answer(model, tokenizer, question: str, max_new_tokens: int = 50) -> str:
     device = next(model.parameters()).device
-    enc = tokenizer(question, return_tensors="pt", truncation=True, max_length=256)
+    # Use chat template with thinking disabled (Qwen3 enable_thinking=False)
+    # so the model gives direct answers rather than lengthy CoT blocks.
+    if hasattr(tokenizer, "apply_chat_template"):
+        try:
+            messages = [{"role": "user", "content": question}]
+            formatted = tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=False,
+            )
+            enc = tokenizer(formatted, return_tensors="pt", truncation=True, max_length=512)
+        except TypeError:
+            enc = tokenizer(question, return_tensors="pt", truncation=True, max_length=256)
+    else:
+        enc = tokenizer(question, return_tensors="pt", truncation=True, max_length=256)
     input_ids = enc.input_ids.to(device)
     with torch.no_grad():
         out = model.generate(
@@ -187,8 +202,7 @@ def generate_answer(model, tokenizer, question: str, max_new_tokens: int = 50) -
         )
     new_tokens = out[0][input_ids.shape[-1]:]
     text = tokenizer.decode(new_tokens, skip_special_tokens=True).strip().lower()
-    # Qwen3 / thinking models emit <think>...</think> before the actual answer.
-    # Extract the portion after </think> so the expected substring is not missed.
+    # Fallback: extract after </think> in case thinking was still emitted
     if "</think>" in text:
         text = text.split("</think>", 1)[1].strip()
     return text
