@@ -27,13 +27,14 @@ from transformers import AutoTokenizer
 
 # ── Test sentences (same semantic content in each language) ───────────────────
 
-# Five models spanning 1B → 70B; used as default when --models not specified
+# Five models spanning 0.6B → 8B; used as default when --models not specified
+# All are non-gated; TinyLlama provides Llama-family tokenizer without gating
 DEFAULT_MODELS = [
-    "google/gemma-3-1b-it",           # 1 B
-    "Qwen/Qwen3-1.7B",                # 1.7 B
-    "microsoft/Phi-4-mini-instruct",  # 3.8 B
-    "Qwen/Qwen3-8B",                  # 8 B
-    "meta-llama/Llama-3.1-70B-Instruct",  # 70 B (NF4 on GPU)
+    "Qwen/Qwen3-0.6B",                # 0.6 B  (Qwen3 tokenizer)
+    "Qwen/Qwen3-1.7B",                # 1.7 B  (Qwen3 tokenizer)
+    "microsoft/Phi-4-mini-instruct",  # 3.8 B  (Phi tokenizer)
+    "Qwen/Qwen3-8B",                  # 8 B    (Qwen3 tokenizer)
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",  # 1.1 B (Llama tokenizer family)
 ]
 
 SENTENCES: Dict[str, List[str]] = {

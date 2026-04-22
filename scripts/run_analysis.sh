@@ -26,11 +26,11 @@ echo ""
 echo "[1/3] Token Fertility Analysis (CPU, all 5 models)..."
 python3 benchmarks/token_fertility.py \
     --models \
-        google/gemma-3-1b-it \
+        Qwen/Qwen3-0.6B \
         Qwen/Qwen3-1.7B \
         microsoft/Phi-4-mini-instruct \
         Qwen/Qwen3-8B \
-        meta-llama/Llama-3.1-8B-Instruct \
+        TinyLlama/TinyLlama-1.1B-Chat-v1.0 \
     --languages en hi mr gu or bn ta te kn ml \
     --output "$LOGDIR/token_fertility.json" \
     2>&1 | tee "$LOGDIR/token_fertility.log"
