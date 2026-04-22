@@ -70,7 +70,7 @@ echo "[3/3] Cross-Lingual Consistency (GPU) for $MODEL..."
 python3 benchmarks/cross_lingual_consistency.py \
     --model "$MODEL" \
     --languages en hi mr gu or bn ta te kn ml \
-    --max_new_tokens 60 \
+    --max_new_tokens 256 \
     --output "$LOGDIR/consistency.json" \
     2>&1 | tee "$LOGDIR/consistency.log"
 

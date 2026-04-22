@@ -186,7 +186,12 @@ def generate_answer(model, tokenizer, question: str, max_new_tokens: int = 50) -
             pad_token_id=tokenizer.eos_token_id,
         )
     new_tokens = out[0][input_ids.shape[-1]:]
-    return tokenizer.decode(new_tokens, skip_special_tokens=True).strip().lower()
+    text = tokenizer.decode(new_tokens, skip_special_tokens=True).strip().lower()
+    # Qwen3 / thinking models emit <think>...</think> before the actual answer.
+    # Extract the portion after </think> so the expected substring is not missed.
+    if "</think>" in text:
+        text = text.split("</think>", 1)[1].strip()
+    return text
 
 
 def score_consistency(
