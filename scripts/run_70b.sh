@@ -13,7 +13,7 @@ set -uo pipefail
 cd /root/icpr
 source .venv/bin/activate
 
-export HF_TOKEN="${HF_TOKEN:-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}"
+export HF_TOKEN="${HF_TOKEN:?ERROR: HF_TOKEN env var must be set before running}"
 export HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"
 
 MODEL_ID="meta-llama/Llama-3.1-70B-Instruct"

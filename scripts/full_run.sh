@@ -11,7 +11,7 @@ set -uo pipefail
 cd /root/icpr
 source .venv/bin/activate
 
-export HF_TOKEN="${HF_TOKEN:-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}"
+export HF_TOKEN="${HF_TOKEN:?ERROR: HF_TOKEN env var must be set before running}"
 export HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"
 
 LOGFILE="results/full_run.log"
@@ -25,12 +25,13 @@ echo "  GPU     : $(nvidia-smi --query-gpu=name,memory.total --format=csv,nohead
 echo "  Datasets: FULL (GSM8K=1319, BoolQ=3270, MSMARCO=1000)"
 echo "  Models  : Qwen3-8B | Phi-4-Mini | Llama-3.1-8B | Gemma-3-12B"
 echo "  Methods : baseline | kv_compress"
-echo "  Langs   : EN + Hindi + Odia + Bengali"
+echo "  Langs   : EN + Hindi + Odia + Bengali + FLORES-200 (9 Indic langs)"
 echo "========================================================"
 
 # Full dataset sizes (no --max-samples flag → evaluation scripts use complete splits)
 ENGLISH_BENCHES="gsm8k boolq msmarco"
-MULTILINGUAL_BENCHES="mgsm_bn indicqa_hi indicqa_or indic_sentiment_hi indic_sentiment_or"
+MULTILINGUAL_BENCHES="mgsm_bn mgsm_hi indicqa_hi indicqa_or indic_sentiment_hi indic_sentiment_or"
+FLORES_BENCHES="flores_hi flores_or flores_bn flores_ta flores_te flores_gu flores_mr flores_ml flores_kn"
 
 declare -A MODELS=(
     ["qwen3_8b"]="Qwen/Qwen3-8B"
@@ -76,6 +77,20 @@ for MODEL_KEY in $MODEL_ORDER; do
             --output-dir  "results/${MODEL_KEY}/multilingual_${COMPRESSION}" \
         && echo "  [OK] Multilingual benchmarks done: $MODEL_KEY / $COMPRESSION" \
         || echo "  [WARN] Multilingual benchmarks had errors: $MODEL_KEY / $COMPRESSION"
+
+        echo ""
+        echo "──────────────────────────────────────────"
+        echo "  $MODEL_KEY / $COMPRESSION / FLORES-200"
+        echo "──────────────────────────────────────────"
+        python3 evaluation/run_all.py \
+            --model-id    "$MODEL_ID" \
+            --model-path  "$MODEL_ID" \
+            --compression "$COMPRESSION" \
+            --benchmarks  $FLORES_BENCHES \
+            --max-samples 200 \
+            --output-dir  "results/${MODEL_KEY}/flores_${COMPRESSION}" \
+        && echo "  [OK] FLORES benchmarks done: $MODEL_KEY / $COMPRESSION" \
+        || echo "  [WARN] FLORES benchmarks had errors: $MODEL_KEY / $COMPRESSION"
     done
 done
 

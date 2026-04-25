@@ -7,7 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT"
 
-export HF_TOKEN="${HF_TOKEN:-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}"
+export HF_TOKEN="${HF_TOKEN:?ERROR: HF_TOKEN env var must be set before running}"
 export HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"
 
 # Full dataset: no --max-samples flag (uses complete test/validation splits)

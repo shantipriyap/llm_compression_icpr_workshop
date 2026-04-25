@@ -30,19 +30,40 @@ BENCHMARK_SCRIPTS = {
     "boolq":   "benchmarks/boolq_eval.py",
     # Multilingual benchmarks
     "mgsm_bn":             "benchmarks/mgsm_eval.py",
+    "mgsm_hi":             "benchmarks/mgsm_eval.py",
     "indicqa_or":          "benchmarks/indicqa_eval.py",
     "indicqa_hi":          "benchmarks/indicqa_eval.py",
     "indic_sentiment_hi":  "benchmarks/indic_sentiment_eval.py",
     "indic_sentiment_or":  "benchmarks/indic_sentiment_eval.py",
+    # FLORES-200 Indic subset
+    "flores_hi":           "benchmarks/flores_eval.py",
+    "flores_or":           "benchmarks/flores_eval.py",
+    "flores_bn":           "benchmarks/flores_eval.py",
+    "flores_ta":           "benchmarks/flores_eval.py",
+    "flores_te":           "benchmarks/flores_eval.py",
+    "flores_gu":           "benchmarks/flores_eval.py",
+    "flores_mr":           "benchmarks/flores_eval.py",
+    "flores_ml":           "benchmarks/flores_eval.py",
+    "flores_kn":           "benchmarks/flores_eval.py",
 }
 
 # Extra CLI flags injected per benchmark key
 BENCHMARK_EXTRA_ARGS = {
     "mgsm_bn":             ["--language", "bn"],
+    "mgsm_hi":             ["--language", "hi"],
     "indicqa_or":          ["--language", "or"],
     "indicqa_hi":          ["--language", "hi"],
     "indic_sentiment_hi":  ["--language", "hi"],
     "indic_sentiment_or":  ["--language", "or"],
+    "flores_hi":           ["--language", "hin_Deva"],
+    "flores_or":           ["--language", "ory_Orya"],
+    "flores_bn":           ["--language", "ben_Beng"],
+    "flores_ta":           ["--language", "tam_Taml"],
+    "flores_te":           ["--language", "tel_Telu"],
+    "flores_gu":           ["--language", "guj_Gujr"],
+    "flores_mr":           ["--language", "mar_Deva"],
+    "flores_ml":           ["--language", "mal_Mlym"],
+    "flores_kn":           ["--language", "kan_Knda"],
 }
 
 
@@ -81,7 +102,7 @@ def main():
     parser.add_argument(
         "--benchmarks", nargs="+",
         default=["gsm8k", "boolq", "msmarco"],
-        choices=list(BENCHMARK_SCRIPTS.keys()) + ["all", "multilingual"],
+        choices=list(BENCHMARK_SCRIPTS.keys()) + ["all", "multilingual", "flores"],
     )
     parser.add_argument("--max-samples", type=int, default=None)
     parser.add_argument("--output-dir", default="results")
@@ -91,16 +112,22 @@ def main():
     # Expand shorthand benchmark groups
     ENGLISH_BENCHMARKS = ["gsm8k", "boolq", "msmarco"]
     MULTILINGUAL_BENCHMARKS = [
-        "mgsm_bn", "indicqa_or", "indicqa_hi",
+        "mgsm_bn", "mgsm_hi", "indicqa_or", "indicqa_hi",
         "indic_sentiment_hi", "indic_sentiment_or",
+    ]
+    FLORES_BENCHMARKS = [
+        "flores_hi", "flores_or", "flores_bn", "flores_ta",
+        "flores_te", "flores_gu", "flores_mr", "flores_ml", "flores_kn",
     ]
     expanded = []
     for b in args.benchmarks:
         if b == "all":
-            expanded = ENGLISH_BENCHMARKS + MULTILINGUAL_BENCHMARKS
+            expanded = ENGLISH_BENCHMARKS + MULTILINGUAL_BENCHMARKS + FLORES_BENCHMARKS
             break
         elif b == "multilingual":
             expanded += MULTILINGUAL_BENCHMARKS
+        elif b == "flores":
+            expanded += FLORES_BENCHMARKS
         else:
             expanded.append(b)
     args.benchmarks = expanded
