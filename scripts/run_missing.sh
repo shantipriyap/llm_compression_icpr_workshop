@@ -46,6 +46,7 @@ run_en() {
         --model-path  "$model_id" \
         --compression "$compression" \
         --benchmarks  $EN_BENCHES \
+        --max-samples 200 \
         --output-dir  "results/${model_key}/${compression}" \
     && echo "  [OK] $model_key / $compression / EN" \
     || echo "  [WARN] $model_key / $compression / EN had errors"
@@ -60,6 +61,7 @@ run_multi() {
         --model-path  "$model_id" \
         --compression "$compression" \
         --benchmarks  $MULTI_BENCHES \
+        --max-samples 200 \
         --output-dir  "results/${model_key}/multilingual_${compression}" \
     && echo "  [OK] $model_key / $compression / MULTILINGUAL" \
     || echo "  [WARN] $model_key / $compression / MULTILINGUAL had errors"
