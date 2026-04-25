@@ -49,14 +49,14 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
     logger.info(f"Loading model '{model_id_or_path}' with method '{compression_method}'")
     hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
     tokenizer = AutoTokenizer.from_pretrained(
-        model_id_or_path, trust_remote_code=True, token=hf_token
+        model_id_or_path, trust_remote_code=False, token=hf_token
     )
 
     if compression_method in ("baseline", "fp16", "bf16"):
         dtype = torch.float16 if compression_method == "fp16" else torch.bfloat16
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            trust_remote_code=True,
+            trust_remote_code=False,
             torch_dtype=dtype,
             device_map="auto",
             token=hf_token,
@@ -65,7 +65,7 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
     elif compression_method == "gptq":
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            trust_remote_code=True,
+            trust_remote_code=False,
             device_map="auto",
             token=hf_token,
         )
@@ -73,7 +73,7 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
     elif compression_method == "awq":
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            trust_remote_code=True,
+            trust_remote_code=False,
             device_map="auto",
             token=hf_token,
         )
@@ -83,7 +83,7 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
         cfg = compression_cfg["kv_cache_compress"]
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            trust_remote_code=True,
+            trust_remote_code=False,
             torch_dtype=torch.bfloat16,
             device_map="auto",
             token=hf_token,
@@ -101,7 +101,7 @@ def load_model(model_id_or_path: str, compression_method: str, compression_cfg: 
         )
         model = AutoModelForCausalLM.from_pretrained(
             model_id_or_path,
-            trust_remote_code=True,
+            trust_remote_code=False,
             quantization_config=bnb_cfg,
             device_map="auto",
             token=hf_token,
