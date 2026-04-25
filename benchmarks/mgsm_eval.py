@@ -41,7 +41,7 @@ def evaluate_mgsm(model, tokenizer, language: str = "bn", max_samples: int = Non
         logger.warning(f"MGSM: language '{language}' not available; using '{mapped}' as proxy.")
     language = mapped
     logger.info(f"Loading MGSM dataset (language={language}) ...")
-    dataset = load_dataset("juletxara/mgsm", language, split="test", trust_remote_code=False)
+    dataset = load_dataset("juletxara/mgsm", language, split="test", trust_remote_code=True)
 
     if max_samples:
         dataset = dataset.select(range(min(max_samples, len(dataset))))
